@@ -8,18 +8,19 @@ using Recetas.Models;
 
 namespace Recetas.Views
 {
-    public partial class NewItemPage : ContentPage
+    public partial class NewRecetaPage : ContentPage
     {
-        public Item Item { get; set; }
+        public Receta Receta { get; set; }
 
-        public NewItemPage()
+        public NewRecetaPage()
         {
             InitializeComponent();
 
-            Item = new Item
+            Receta = new Receta
             {
-                Text = "Item name",
-                Description = "This is an item description."
+                Title = "Título de la receta",
+                Ingredients ="Ingredientes...",
+                Instruction = "Procedimiento..."
             };
 
             BindingContext = this;
@@ -27,7 +28,7 @@ namespace Recetas.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddItem", Item);
+            MessagingCenter.Send(this, "AddItem", Receta);
             await Navigation.PopModalAsync();
         }
 

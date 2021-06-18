@@ -4,13 +4,13 @@ using Recetas.Models;
 
 namespace Recetas.ViewModels
 {
-    public class ItemDetailViewModel : BaseViewModel
+    public class RecetaDetailViewModel : BaseViewModel
     {
-        public Item Item { get; set; }
-        public ItemDetailViewModel(Item item = null)
+        public Receta Receta { get; set; }
+        public RecetaDetailViewModel(Receta receta = null)
         {
-            Title = item?.Text;
-            Item = item;
+            Title = receta?.Title;
+            Receta = receta;
         }
     }
 }

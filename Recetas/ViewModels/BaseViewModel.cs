@@ -12,7 +12,7 @@ namespace Recetas.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IDataStore<Receta> DataStore => DependencyService.Get<IDataStore<Receta>>();
 
         bool isBusy = false;
         public bool IsBusy

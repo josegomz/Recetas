@@ -13,35 +13,36 @@ using Recetas.ViewModels;
 
 namespace Recetas.Views
 {
-    public partial class ItemsPage : ContentPage
+    public partial class RecetaPage : ContentPage
     {
-        ItemsViewModel viewModel;
+        RecetaViewModel viewModel;
 
-        public ItemsPage()
+        public RecetaPage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
+            BindingContext = viewModel = new RecetaViewModel();
         }
 
         async void OnItemSelected(object sender, EventArgs args)
         {
             var layout = (BindableObject)sender;
-            var item = (Item)layout.BindingContext;
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            var item = (Receta)layout.BindingContext;
+            await Navigation.PushAsync(new RecetaDetailPage(new RecetaDetailViewModel(item)));
         }
 
         async void AddItem_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+            await Navigation.PushModalAsync(new NavigationPage(new NewRecetaPage()));
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
+            if (viewModel.Recetas.Count == 0)
                 viewModel.IsBusy = true;
         }
     }
 }
+    

@@ -8,28 +8,29 @@ using Recetas.ViewModels;
 
 namespace Recetas.Views
 {
-    public partial class ItemDetailPage : ContentPage
+    public partial class RecetaDetailPage : ContentPage
     {
-        ItemDetailViewModel viewModel;
+        RecetaDetailViewModel viewModel;
 
-        public ItemDetailPage(ItemDetailViewModel viewModel)
+        public RecetaDetailPage(RecetaDetailViewModel viewModel)
         {
             InitializeComponent();
 
             BindingContext = this.viewModel = viewModel;
         }
 
-        public ItemDetailPage()
+        public RecetaDetailPage()
         {
             InitializeComponent();
 
-            var item = new Item
+            var receta = new Receta
             {
-                Text = "Item 1",
-                Description = "This is an item description."
+                Title = "receta",
+                Ingredients = "Ingredientes",
+                Instruction = "Procedimiento"
             };
 
-            viewModel = new ItemDetailViewModel(item);
+            viewModel = new RecetaDetailViewModel(receta);
             BindingContext = viewModel;
         }
     }

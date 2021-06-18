@@ -6,55 +6,51 @@ using Recetas.Models;
 
 namespace Recetas.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class MockDataStore : IDataStore<Receta>
     {
-        readonly List<Item> items;
+        readonly List<Receta> recetas;
 
         public MockDataStore()
         {
-            items = new List<Item>()
+            recetas = new List<Receta>()
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." }
+                new Receta { Id = Guid.NewGuid().ToString(), Title = "Huevo con jamón", Ingredients="huevo, jamón",Instruction="Cocinar el huevo con el jamon" },
+                new Receta { Id = Guid.NewGuid().ToString(), Title = "Pollo frito", Ingredients="pollo",Instruction="freir el pollo" }
             };
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddRecetaAsync(Receta receta)
         {
-            items.Add(item);
+            recetas.Add(receta);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateRecetaAsync(Receta receta)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(oldItem);
-            items.Add(item);
+            var oldItem = recetas.Where((Receta arg) => arg.Id == receta.Id).FirstOrDefault();
+            recetas.Remove(oldItem);
+            recetas.Add(receta);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteRecetaAsync(string id)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
-            items.Remove(oldItem);
+            var oldItem = recetas.Where((Receta arg) => arg.Id == id).FirstOrDefault();
+            recetas.Remove(oldItem);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Receta> GetRecetaAsync(string id)
         {
-            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+            return await Task.FromResult(recetas.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Receta>> GetRecetasAsync(bool forceRefresh = false)
         {
-            return await Task.FromResult(items);
+            return await Task.FromResult(recetas);
         }
     }
 }
