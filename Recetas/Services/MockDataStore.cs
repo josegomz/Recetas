@@ -3,54 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Recetas.Models;
+using SQLite;
 
 namespace Recetas.Services
 {
     public class MockDataStore : IDataStore<Receta>
     {
-        readonly List<Receta> recetas;
+        public SQLiteAsyncConnection database;
 
-        public MockDataStore()
+
+        List<Receta> recetas;
+
+        
+
+        public MockDataStore(string dbPath)
         {
-            recetas = new List<Receta>()
+            database = new SQLiteAsyncConnection(dbPath);
+            database.CreateTableAsync<Receta>().Wait();
+        }
+       
+        public Task<int> AddRecetaAsync(Receta receta)
+        {
+            if (receta.Id == 0)
             {
-                new Receta { Id = Guid.NewGuid().ToString(), Title = "Huevo con jamón", Ingredients="huevo, jamón",Instruction="Cocinar el huevo con el jamon" },
-                new Receta { Id = Guid.NewGuid().ToString(), Title = "Pollo frito", Ingredients="pollo",Instruction="freir el pollo" }
-            };
+                return database.InsertAsync(receta);
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public async Task<bool> AddRecetaAsync(Receta receta)
+        public Task<List<Receta>> GetRecetasAsync(bool forceRefresh = false)
         {
-            recetas.Add(receta);
-
-            return await Task.FromResult(true);
-        }
-
-        public async Task<bool> UpdateRecetaAsync(Receta receta)
-        {
-            var oldItem = recetas.Where((Receta arg) => arg.Id == receta.Id).FirstOrDefault();
-            recetas.Remove(oldItem);
-            recetas.Add(receta);
-
-            return await Task.FromResult(true);
-        }
-
-        public async Task<bool> DeleteRecetaAsync(string id)
-        {
-            var oldItem = recetas.Where((Receta arg) => arg.Id == id).FirstOrDefault();
-            recetas.Remove(oldItem);
-
-            return await Task.FromResult(true);
-        }
-
-        public async Task<Receta> GetRecetaAsync(string id)
-        {
-            return await Task.FromResult(recetas.FirstOrDefault(s => s.Id == id));
-        }
-
-        public async Task<IEnumerable<Receta>> GetRecetasAsync(bool forceRefresh = false)
-        {
-            return await Task.FromResult(recetas);
+            return database.Table<Receta>().ToListAsync();
         }
     }
 }

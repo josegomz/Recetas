@@ -33,5 +33,17 @@ namespace Recetas.Views
             viewModel = new RecetaDetailViewModel(receta);
             BindingContext = viewModel;
         }
+
+        async void Update_Clicked(object sender, EventArgs e)
+        {
+            await DisplayAlert("Proximamente", "Este módulo aun no se ha desarrollado", "OK");
+
+        }
+
+        async void Delete_Clicked(object sender, EventArgs e)
+        {
+            await DisplayAlert("Proximamente", "Este módulo aun no se ha desarrollado", "OK");
+
+        }
     }
 }

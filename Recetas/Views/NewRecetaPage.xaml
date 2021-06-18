@@ -11,12 +11,12 @@
     
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">
-            <Label Text="Title" FontSize="Medium" />
-            <Entry Text="{Binding Receta.Title}" FontSize="Small" />
-            <Label Text="Ingredients" FontSize="Medium" />
-            <Entry Text="{Binding Receta.Ingredients}" FontSize="Small" />
-            <Label Text="Instruction" FontSize="Medium" />
-            <Editor Text="{Binding Receta.Instruction}" FontSize="Small" Margin="0" />
+            <Label Text="Título" FontSize="Medium" />
+            <Entry Text="{Binding Receta.Title}" FontSize="Small" Placeholder="Receta de cocina"  />
+            <Label Text="Ingredientes" FontSize="Medium" />
+            <Editor Text="{Binding Receta.Ingredients}" FontSize="Small" Placeholder="ingredientes..." HeightRequest="100"/>
+            <Label Text="Instrucción" FontSize="Medium" />
+            <Editor Text="{Binding Receta.Instruction}"  FontSize="Small"  Placeholder="instrucciones..." HeightRequest="100"/>
         </StackLayout>
     </ContentPage.Content>
     

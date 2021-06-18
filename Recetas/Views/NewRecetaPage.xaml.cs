@@ -18,9 +18,9 @@ namespace Recetas.Views
 
             Receta = new Receta
             {
-                Title = "Título de la receta",
-                Ingredients ="Ingredientes...",
-                Instruction = "Procedimiento..."
+                Title = "",
+                Ingredients ="",
+                Instruction = ""
             };
 
             BindingContext = this;
@@ -28,7 +28,7 @@ namespace Recetas.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddItem", Receta);
+            MessagingCenter.Send(this, "AddReceta", Receta);
             await Navigation.PopModalAsync();
         }
 
